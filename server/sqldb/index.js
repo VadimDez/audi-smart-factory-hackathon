@@ -14,6 +14,7 @@ var db = {
 };
 
 // Insert models below
+db.Car = db.sequelize.import('../api/car/car.model');
 db.Process = db.sequelize.import('../api/process/process.model');
 db.Thing = db.sequelize.import('../api/thing/thing.model');
 db.User = db.sequelize.import('../api/user/user.model');
