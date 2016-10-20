@@ -10,7 +10,7 @@
 'use strict';
 
 import _ from 'lodash';
-import {Process} from '../../sqldb';
+import { sequelize, Process} from '../../sqldb';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -67,12 +67,20 @@ export function index(req, res) {
 
 // Gets a single Process from the DB
 export function show(req, res) {
-  return Process.find({
-    where: {
-      _id: req.params.id
-    }
-  })
-    .then(handleEntityNotFound(res))
+  // return Process.find({
+  //   where: {
+  //     LFD_NR: req.params.id
+  //   }
+  // })
+  return sequelize.query('SELECT *, SUM(p.VERRECHNUNG) as time FROM prod_processes p WHERE p.LFD_NR = ? GROUP BY p.ARBEITSPLATZ, p.LFD_NR ORDER BY p.ID LIMIT 1,1',
+    { replacements: [req.params.id], type: sequelize.QueryTypes.SELECT })
+    .then(function(entity) {
+      if (!entity || !entity[0]) {
+        res.status(404).end();
+        return null;
+      }
+      return entity[0];
+    })
     .then(respondWithResult(res))
     .catch(handleError(res));
 }

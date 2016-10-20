@@ -9,9 +9,10 @@
       this.$http = $http;
       this.socket = socket;
       this.actual = 0;
-      this.max = 200;
+      this.max = 34;
       this.isDetailsShown = false;
       this.selectedSector = null;
+      this.isPlaying = true;
       this.workplaces = [
         [],
         // [],
@@ -29,6 +30,10 @@
       }
 
       $interval(() => {
+        if (!this.isPlaying) {
+          return;
+        }
+
         this.actual++;
 
         if (this.actual >= this.max) {
@@ -75,7 +80,21 @@
 
     onClick(points, evt) {
       console.log(points, evt);
-    };
+    }
+
+    togglePlay() {
+      this.isPlaying = !this.isPlaying;
+    }
+
+    back() {
+      this.isPlaying = false;
+      this.actual--;
+    }
+
+    forward() {
+      this.isPlaying = false;
+      this.actual++;
+    }
   }
 
   angular.module('audiSmartFactoryHackathonApp')
