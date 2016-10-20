@@ -1,4 +1,4 @@
-$car-size: 30px;
+$car-size: 10px;
 $car-color: #39d855;
 $workplace-color: #e8e8e8;
 
@@ -17,6 +17,18 @@ $workplace-color: #e8e8e8;
   align-items: center;
   border: 1px solid #b2b2b2;
   float: left;
+  margin-bottom: 20px;
+  &:nth-child(2n) {
+    background-color: #f7f7f7;
+  }
+
+  &.error-state {
+    background-color: rgba(255, 0, 0, 0.62);
+  }
+
+  &.good-state {
+    background-color: rgba(0, 128, 0, 0.58);
+  }
 }
 
 .assembly-line {

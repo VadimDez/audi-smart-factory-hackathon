@@ -9,22 +9,23 @@
       this.$http = $http;
       this.socket = socket;
       this.actual = 0;
-      this.max = 16;
+      this.max = 200;
       this.isDetailsShown = false;
       this.selectedSector = null;
       this.workplaces = [
         [],
-        [],
+        // [],
       ];
 
       for (var i = 0; i < this.max; i++) {
         let obj = {
           id: i,
           name: 'name...' + i,
-          time: i * Math.random()
+          time: parseInt(i * Math.random(), 10)
         };
+
         this.workplaces[0].push(obj);
-        this.workplaces[1].push(obj);
+        // this.workplaces[1].push(obj);
       }
 
       $interval(() => {
