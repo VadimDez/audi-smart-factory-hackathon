@@ -1,0 +1,24 @@
+{
+  "name": "audi-smart-factory-hackathon",
+  "version": "0.1.0",
+  "description": "Audi smart factory hackathon project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VadimDez/audi-smart-factory-hackathon.git"
+  },
+  "keywords": [
+    "audi",
+    "hackathon",
+    "smart-factory"
+  ],
+  "author": "Vadym Yatsyuk <vadym.yatsyuk@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VadimDez/audi-smart-factory-hackathon/issues"
+  },
+  "homepage": "https://github.com/VadimDez/audi-smart-factory-hackathon#readme"
+}
