@@ -1,5 +1,18 @@
 <div ng-repeat="workplaces in $ctrl.workplaces" class="assembly-line">
-    <div ng-repeat="workplace in workplaces" class="workplace">
+    <div ng-repeat="workplace in workplaces" ng-click="$ctrl.showDetails(workplace)" class="workplace">
         <div ng-if="workplace.id === $ctrl.actual" class="car"></div>
+    </div>
+</div>
+
+<div ng-if="$ctrl.isDetailsShown" ng-click="$ctrl.toggleDetail()" class="sector-details">
+    <div>
+        <h1>Details</h1>
+        <h4>{{ $ctrl.selectedSector.name }}</h4>
+        <p></p>
+
+        <canvas id="line" class="chart chart-line" chart-data="$ctrl.data"
+                chart-labels="$ctrl.labels" chart-series="$ctrl.series" chart-options="$ctrl.options"
+                chart-dataset-override="$ctrl.datasetOverride" chart-click="$ctrl.onClick"
+        ></canvas>
     </div>
 </div>
