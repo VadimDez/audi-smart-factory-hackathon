@@ -99,6 +99,25 @@ export function show(req, res) {
     .catch(handleError(res));
 }
 
+export function next5(req, res) {
+  // return Process.find({
+  //   where: {
+  //     LFD_NR: req.params.id
+  //   }
+  // })
+  return sequelize.query('SELECT * FROM prod_processes p WHERE p.WorkStation = ? GROUP BY p.WorkStation, LFD_NR LIMIT ?, 5',
+    { replacements: [req.params.workstation, parseInt(req.params.id, 10)], type: sequelize.QueryTypes.SELECT })
+    .then(function(entity) {
+      if (!entity) {
+        res.status(404).end();
+        return null;
+      }
+      return entity;
+    })
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
 // Creates a new Process in the DB
 export function create(req, res) {
   return Process.create(req.body)

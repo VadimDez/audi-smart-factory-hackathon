@@ -60,7 +60,16 @@ function handleError(res, statusCode) {
 
 // Gets a list of Cars
 export function index(req, res) {
-  return Car.findAll()
+  return Car.findAll({
+    attributes: [
+      'LDF_NR',
+      'FARBSCHLUESSEL',
+      'FZGKL',
+      'PR_Nummer',
+      'KENNNR',
+      'VIN'
+    ]
+  })
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -68,8 +77,16 @@ export function index(req, res) {
 // Gets a single Car from the DB
 export function show(req, res) {
   return Car.find({
+    attributes: [
+      'LFD_NR',
+      'FARBSCHLUESSEL',
+      'FZGKL',
+      'PR_Nummer',
+      'KENNNR',
+      'VIN'
+    ],
     where: {
-      _id: req.params.id
+      LFD_NR: req.params.id
     }
   })
     .then(handleEntityNotFound(res))

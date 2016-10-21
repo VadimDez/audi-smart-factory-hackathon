@@ -10,10 +10,12 @@
     <div ng-repeat="workplace in workplaces" class="workplace"></div>
 </div>
 
-<h3 class="ba-title">BA2</h3>
+<h3 class="ba-title">BA2 <a ng-click="$ctrl.showBADetails()">See details</a></h3>
 <div ng-repeat="workplaces in $ctrl.workplaces" class="assembly-line">
     <div ng-repeat="(i, workplace) in workplaces" ng-click="$ctrl.showDetails(i)" class="workplace" ng-class="{ 'error-state': workplace.times.length && $ctrl.getCapacity(i) > $ctrl.avg, 'good-state': workplace.times.length && $ctrl.getCapacity(i) <= $ctrl.avg }">
-        <div ng-if="workplace.id <= $ctrl.actual" class="car"></div>
+        <div ng-if="workplace.id <= $ctrl.actual" class="car">
+            <img src="/assets/images/car.png" alt="">
+        </div>
     </div>
 </div>
 
@@ -34,5 +36,31 @@
                 chart-labels="$ctrl.labels" chart-series="$ctrl.series" chart-options="$ctrl.options"
                 chart-dataset-override="$ctrl.datasetOverride" chart-click="$ctrl.onClick"
         ></canvas>
+
+        <h2>Next 5 Cars</h2>
+        <canvas id="bar"
+                class="chart chart-bar"
+                chart-data="$ctrl.nextData"
+                chart-labels="$ctrl.nextLabels"
+                chart-series="$ctrl.nextSeries"
+        ></canvas>
+
+        <h2>Car info</h2>
+
+        <h5>Car model</h5>
+        <p>{{ $ctrl.car.FZGKL }}</p>
+
+        <h5>Car features</h5>
+        <ul class="list-group">
+            <li ng-repeat="feature in $ctrl.car.PR_Nummer.split('#') track by $index" class="list-group-item">
+                {{ feature }}
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div ng-if="$ctrl.isBADetailsShown" ng-click="$ctrl.toggleBADetail()" class="overall-details">
+    <div>
+
     </div>
 </div>

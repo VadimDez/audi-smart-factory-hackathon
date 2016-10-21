@@ -2,7 +2,7 @@
 
 export default function(sequelize, DataTypes) {
   return sequelize.define('Cars', {
-    LDF_NR: DataTypes.INTEGER,
+    LFD_NR: DataTypes.INTEGER,
     FARBSCHLUESSEL: DataTypes.STRING,
     FZGKL: DataTypes.STRING,
     PR_Nummer: DataTypes.STRING,

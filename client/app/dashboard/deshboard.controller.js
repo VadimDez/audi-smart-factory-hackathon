@@ -13,8 +13,12 @@
       this.avg = 87;
       this.car = 1;
       this.isDetailsShown = false;
+      this.isBADetailsShown = false;
       this.isPlaying = true;
       this.activeIndex = null;
+      this.nextData = [];
+      this.nextLabels = [];
+      this.nextSeries = [];
       this.workplaces = [
         [],
         // [],
@@ -51,6 +55,8 @@
 
         if (this.activeIndex !== null) {
           this.showDetails(this.activeIndex);
+
+          this.getNextCarsData(this.activeIndex);
         }
       }, 2000);
 
@@ -81,6 +87,29 @@
         },
         animation: false
       };
+    }
+
+    getNextCarsData(index) {
+      index += 1;
+      this.$http.get('/api/processes/next5/' + index + '/F2' + ('0' + index).substr(-2))
+        .then(res => {
+          this.nextData = [res.data.map(value => {
+            return value.real_time;
+          })];
+          this.nextLabels = res.data.map(value => {
+            return value.LFD_NR;
+          });
+          this.nextSeries = ['Next cars'];
+
+          console.log(this.nextData);
+        });
+    }
+
+    getCar(id) {
+      this.$http.get('/api/cars/' + id)
+        .then(res => {
+          this.car = res.data;
+        });
     }
 
     setCar(index, car) {
@@ -120,12 +149,22 @@
       }).map((value) => {
         init += value;
         return init;
-      })
+      });
+
+      this.(index + 1);
+    }
+
+    showBADetails() {
+      this.isBADetailsShown = true;
     }
 
     toggleDetail() {
       this.activeIndex = null;
       this.isDetailsShown = false;
+    }
+
+    toggleBADetail() {
+      this.isBADetailsShown = false;
     }
 
     onClick(points, evt) {
