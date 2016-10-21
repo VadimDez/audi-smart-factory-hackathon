@@ -4,18 +4,32 @@
     <button ng-if="$ctrl.isPlaying" ng-click="$ctrl.togglePlay()" class="btn btn-default">Stop</button>
     <button ng-click="$ctrl.forward()" class="btn btn-default">Forward</button>
 </div>
+
+<h3 class="ba-title">BA3</h3>
+<div ng-repeat="workplaces in $ctrl.workplaces" class="assembly-line inactive">
+    <div ng-repeat="workplace in workplaces" class="workplace"></div>
+</div>
+
+<h3 class="ba-title">BA2</h3>
 <div ng-repeat="workplaces in $ctrl.workplaces" class="assembly-line">
-    <div ng-repeat="workplace in workplaces" ng-click="$ctrl.showDetails(workplace)" class="workplace" ng-class="{ 'error-state': workplace.time > 87, 'good-state': workplace.time <= 87 }">
-        <div ng-if="workplace.id === $ctrl.actual" class="car"></div>
+    <div ng-repeat="(i, workplace) in workplaces" ng-click="$ctrl.showDetails(i)" class="workplace" ng-class="{ 'error-state': workplace.times.length && $ctrl.getCapacity(i) > $ctrl.avg, 'good-state': workplace.times.length && $ctrl.getCapacity(i) <= $ctrl.avg }">
+        <div ng-if="workplace.id <= $ctrl.actual" class="car"></div>
+    </div>
+</div>
+
+
+<h3 class="ba-title">BA1</h3>
+<div ng-repeat="workplaces in $ctrl.workplaces" class="assembly-line inactive">
+    <div ng-repeat="workplace in workplaces"  class="workplace">
     </div>
 </div>
 
 <div ng-if="$ctrl.isDetailsShown" ng-click="$ctrl.toggleDetail()" class="sector-details">
     <div>
         <h1>Details</h1>
-        <h4>{{ $ctrl.selectedSector.name }}</h4>
         <p></p>
 
+        <h4>Akkumulierte Auslastung</h4>
         <canvas id="line" class="chart chart-line" chart-data="$ctrl.data"
                 chart-labels="$ctrl.labels" chart-series="$ctrl.series" chart-options="$ctrl.options"
                 chart-dataset-override="$ctrl.datasetOverride" chart-click="$ctrl.onClick"

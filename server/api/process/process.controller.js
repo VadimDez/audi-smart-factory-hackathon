@@ -60,7 +60,21 @@ function handleError(res, statusCode) {
 
 // Gets a list of Processs
 export function index(req, res) {
-  return Process.findAll()
+  return Process.findAll({
+    attributes: [
+      'LFD_NR',
+      'ARBEITSPLATZ',
+      'WorkStation',
+      'Man',
+      'real_time',
+      'KURZTEXT',
+      [sequelize.fn('SUM', sequelize.col('real_time')), 'total_time']
+    ],
+    group: [
+      'LFD_NR',
+      'WorkStation'
+    ]
+  })
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -72,8 +86,8 @@ export function show(req, res) {
   //     LFD_NR: req.params.id
   //   }
   // })
-  return sequelize.query('SELECT *, SUM(p.VERRECHNUNG) as time FROM prod_processes p WHERE p.LFD_NR = ? GROUP BY p.ARBEITSPLATZ, p.LFD_NR ORDER BY p.ID LIMIT 1,1',
-    { replacements: [req.params.id], type: sequelize.QueryTypes.SELECT })
+  return sequelize.query('SELECT * FROM prod_processes p WHERE p.LFD_NR = ? AND p.WorkStation = ?',
+    { replacements: [req.params.id, req.params.workstation], type: sequelize.QueryTypes.SELECT })
     .then(function(entity) {
       if (!entity || !entity[0]) {
         res.status(404).end();

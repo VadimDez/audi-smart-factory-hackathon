@@ -14,16 +14,19 @@ export default function(sequelize, DataTypes) {
 
     // ID: DataTypes.INTEGER,
     LFD_NR: DataTypes.INTEGER,
-    AF: DataTypes.STRING,
+    // AF: DataTypes.STRING,
     KURZTEXT: DataTypes.STRING,
-    VERRECHNUNG: DataTypes.FLOAT,
-    HAUEFIGKEIT: DataTypes.STRING,
-    GEW_VERRECHNUNG: DataTypes.FLOAT,
-    FZGKL: DataTypes.FLOAT,
-    KLASSIFIKATION: DataTypes.INTEGER,
-    ARBEITSBEREICH: DataTypes.STRING,
-    FERTIGUNGSGRUPPE: DataTypes.INTEGER,
+    // VERRECHNUNG: DataTypes.FLOAT,
+    // HAUEFIGKEIT: DataTypes.STRING,
+    // GEW_VERRECHNUNG: DataTypes.FLOAT,
+    // FZGKL: DataTypes.FLOAT,
+    // KLASSIFIKATION: DataTypes.INTEGER,
+    // ARBEITSBEREICH: DataTypes.STRING,
+    // FERTIGUNGSGRUPPE: DataTypes.INTEGER,
     ARBEITSPLATZ: DataTypes.STRING,
-    PR_Nummer: DataTypes.STRING
+    // PR_Nummer: DataTypes.STRING,
+    real_time: DataTypes.FLOAT,
+    Man: DataTypes.INTEGER,
+    WorkStation: DataTypes.STRING
   });
 }
