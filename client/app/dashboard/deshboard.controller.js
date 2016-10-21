@@ -57,6 +57,9 @@
           this.showDetails(this.activeIndex);
 
           this.getNextCarsData(this.activeIndex);
+
+
+          this.getCar(this.car);
         }
       }, 2000);
 
@@ -108,7 +111,7 @@
     getCar(id) {
       this.$http.get('/api/cars/' + id)
         .then(res => {
-          this.car = res.data;
+          this.carObject = res.data;
         });
     }
 
@@ -133,8 +136,6 @@
     }
 
     getWorkstation(car, workstation) {
-      console.log('CAR NUMBER');
-      console.log(car);
       return this.$http.get('/api/processes/' + car + '/' + workstation);
     }
 
@@ -152,8 +153,6 @@
         init += value;
         return init;
       });
-
-      this.getCar(index + 1);
     }
 
     showBADetails() {
@@ -202,8 +201,9 @@
     overAll(id) {
       this.$http.get('/api/processes/overall/' + id)
         .then(result => {
-          this.carData = result.data.map(v => [v.sum]);
-          this.carLabels = result.data.map(v => v.LFD_NR)
+          this.seriesOverall = ['Data'];
+          this.labelsOverall = result.data.map(v => v.LFD_NR);
+          this.dataOverall = result.data.map(v => v.sum);
         });
     }
   }

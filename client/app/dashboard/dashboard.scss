@@ -2,10 +2,20 @@ $car-size: 13px;
 $car-color: #000;//#39d855;
 $workplace-color: #e8e8e8;
 
+@keyframes run {
+  0% {
+    margin-left: -50px;
+  }
+  100% {
+    margin-left: 25px;
+  }
+}
+
 .car {
   width: $car-size;
   height: $car-size;
   border-radius: 50%;
+  animation: run 2s infinite;
 
   > img {
     margin-top: -5px;

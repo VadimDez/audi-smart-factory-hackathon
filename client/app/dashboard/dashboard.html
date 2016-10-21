@@ -48,11 +48,11 @@
         <h2>Car info</h2>
 
         <h5>Car model</h5>
-        <p>{{ $ctrl.car.FZGKL }}</p>
+        <p>{{ $ctrl.carObject.FZGKL }}</p>
 
         <h5>Car features</h5>
         <ul class="list-group">
-            <li ng-repeat="feature in $ctrl.car.PR_Nummer.split('#') track by $index" class="list-group-item">
+            <li ng-repeat="feature in $ctrl.carObject.PR_Nummer.split('#') track by $index" class="list-group-item">
                 {{ feature }}
             </li>
         </ul>
@@ -62,5 +62,9 @@
 <div ng-if="$ctrl.isBADetailsShown" ng-click="$ctrl.toggleBADetail()" class="overall-details">
     <div>
         <h2>Overall BA2 overview</h2>
+
+        <canvas id="lines" class="chart chart-line" chart-data="$ctrl.dataOverall"
+                chart-labels="$ctrl.labelsOverall" chart-series="$ctrl.seriesOverall" chart-options="$ctrl.optionsOverall"
+        ></canvas>
     </div>
 </div>

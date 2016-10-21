@@ -124,8 +124,8 @@ export function overall(req, res) {
   //     LFD_NR: req.params.id
   //   }
   // })
-  return sequelize.query('SELECT *, SUM(p.sum_for_worker) as sum FROM prod_processes p WHERE p.LFD_NR = 1 GROUP BY p.WorkStation, LFD_NR',
-    { replacements: [parseInt(req.params.id, 10)], type: sequelize.QueryTypes.SELECT })
+  return sequelize.query('SELECT *, SUM(p.real_time) as sum FROM prod_processes p WHERE p.LFD_NR = ? GROUP BY p.WorkStation, LFD_NR',
+    { replacements: [req.params.id], type: sequelize.QueryTypes.SELECT })
     .then(function(entity) {
       if (!entity) {
         res.status(404).end();
