@@ -101,7 +101,7 @@
           });
           this.nextSeries = ['Next cars'];
 
-          console.log(this.nextData);
+          // console.log(this.nextData);
         });
     }
 
@@ -126,13 +126,15 @@
           }
 
           if (index === 0) {
-            console.log(total);
+            // console.log(total);
           }
           this.workplaces[0][index].times.push(total);
         });
     }
 
     getWorkstation(car, workstation) {
+      console.log('CAR NUMBER');
+      console.log(car);
       return this.$http.get('/api/processes/' + car + '/' + workstation);
     }
 
@@ -151,11 +153,13 @@
         return init;
       });
 
-      this.(index + 1);
+      this.getCar(index + 1);
     }
 
     showBADetails() {
       this.isBADetailsShown = true;
+
+      this.overAll(1);
     }
 
     toggleDetail() {
@@ -193,6 +197,14 @@
       }, 0) || 0;
 
       return sum / length;
+    }
+
+    overAll(id) {
+      this.$http.get('/api/processes/overall/' + id)
+        .then(result => {
+          this.carData = result.data.map(v => [v.sum]);
+          this.carLabels = result.data.map(v => v.LFD_NR)
+        });
     }
   }
 

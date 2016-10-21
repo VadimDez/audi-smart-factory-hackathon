@@ -8,6 +8,7 @@ var router = express.Router();
 router.get('/', controller.index);
 router.get('/:id/:workstation', controller.show);
 router.get('/next5/:id/:workstation', controller.next5);
+router.get('/overall/:id', controller.overall);
 // router.post('/', controller.create);
 // router.put('/:id', controller.update);
 // router.patch('/:id', controller.update);
