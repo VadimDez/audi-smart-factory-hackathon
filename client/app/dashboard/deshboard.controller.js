@@ -86,7 +86,20 @@
     setCar(index, car) {
       this.getWorkstation(car, 'F2' + ('0' + (index + 1)).substr(-2))
         .then((res) => {
-          this.workplaces[0][index] = res.data;
+          let total = 0;
+          res.data.forEach((value) => {
+            total += value.real_time;
+          });
+
+          if (total !== 0) {
+            total = total / res.data.length;
+            total -= this.avg;
+          }
+
+          if (index === 0) {
+            console.log(total);
+          }
+          this.workplaces[0][index].times.push(total);
         });
     }
 

@@ -89,11 +89,11 @@ export function show(req, res) {
   return sequelize.query('SELECT * FROM prod_processes p WHERE p.LFD_NR = ? AND p.WorkStation = ?',
     { replacements: [req.params.id, req.params.workstation], type: sequelize.QueryTypes.SELECT })
     .then(function(entity) {
-      if (!entity || !entity[0]) {
+      if (!entity) {
         res.status(404).end();
         return null;
       }
-      return entity[0];
+      return entity;
     })
     .then(respondWithResult(res))
     .catch(handleError(res));
