@@ -1,4 +1,6 @@
-# audi-smart-factory-hackathon
+# Audi smart factory hackathon
+
+Hackathon project for Audi
 
 ### install
 
