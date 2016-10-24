@@ -1,6 +1,6 @@
 # Audi smart factory hackathon
 
-Hackathon project for Audi
+Hackathon project for Audi on "Variants and Sequences".
 
 ### install
 
